@@ -27,7 +27,9 @@ let asyncvalue = 0;
 const asyncIncrementor = () => {
     asyncvalue++; //накапливает решение
     asyncIncrementor.valueOf = () => asyncvalue; //записывает в значение
-    return asyncIncrementor;
+    return new Promise(function (resolve, reject) { 
+        resolve(asyncIncrementor);
+    });
 };
 
 const createIncrementer = () => {
@@ -43,7 +45,7 @@ const createIncrementer = () => {
 // return same incrementorument not earlier than in one second, and not later, than in two
 
 const returnBackInSecond = (param = '') => {
-    return new Promise(function (resolve, reject) {
+    return new Promise( function (resolve, reject) {
         setTimeout(() => {
             resolve(param);
         }, 1000);
